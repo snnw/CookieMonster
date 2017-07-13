@@ -2600,6 +2600,15 @@ CM.Sim.BuildingGetPrice = function(basePrice, start, free, increase) {
 		if (Game.Has('Divine discount')) price *= 0.99;
 		if (Game.hasAura('Fierce Hoarder')) price *= 0.98;
 		if (Game.hasBuff('Everything must go')) price *= 0.95;
+		if (Game.hasBuff('Crafty pixies')) price*=0.98;
+		if (Game.hasBuff('Nasty goblins')) price*=1.02;
+		if (Game.hasGod)
+		{
+			var godLvl=Game.hasGod('creation');
+			if (godLvl==1) price*=0.93;
+			else if (godLvl==2) price*=0.95;
+			else if (godLvl==3) price*=0.98;
+		}
 		price = Math.ceil(price);
 		moni+=price;
 		start++;
@@ -2634,6 +2643,15 @@ CM.Sim.BuildingSell = function(basePrice, start, free, amount, emuAura) {
 		if (Game.Has('Divine discount')) price *= 0.99;
 		if (Game.hasAura('Fierce Hoarder')) price *= 0.98;
 		if (Game.hasBuff('Everything must go')) price *= 0.95;
+		if (Game.hasBuff('Crafty pixies')) price*=0.98;
+		if (Game.hasBuff('Nasty goblins')) price*=1.02;
+		if (Game.hasGod)
+		{
+			var godLvl=Game.hasGod('creation');
+			if (godLvl==1) price*=0.93;
+			else if (godLvl==2) price*=0.95;
+			else if (godLvl==3) price*=0.98;
+		}
 		price = Math.ceil(price);
 		var giveBack = 0.5;
 		if (Game.hasAura('Earth Shatterer') || emuAura) giveBack=0.85;
