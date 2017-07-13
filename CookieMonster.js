@@ -2672,6 +2672,16 @@ CM.Sim.hasAura = function(what) {
 		return false;
 }
 
+CM.Sim.hasGod=function(what)
+{
+	var god=M.gods[what];
+	for (var i=0;i<3;i++)
+	{
+		if (M.slot[i]==god.id) return (i+1);
+	}
+	return false;
+}
+
 eval('CM.Sim.GetTieredCpsMult = ' + Game.GetTieredCpsMult.toString().split('Game.Has').join('CM.Sim.Has').split('me.tieredUpgrades').join('Game.Objects[me.name].tieredUpgrades').split('me.synergies').join('Game.Objects[me.name].synergies').split('syn.buildingTie1.amount').join('CM.Sim.Objects[syn.buildingTie1.name].amount').split('syn.buildingTie2.amount').join('CM.Sim.Objects[syn.buildingTie2.name].amount'));
 
 eval('CM.Sim.getGrandmaSynergyUpgradeMultiplier = ' + Game.getGrandmaSynergyUpgradeMultiplier.toString().split('Game.Objects[\'Grandma\']').join('CM.Sim.Objects[\'Grandma\']'));
@@ -2769,12 +2779,42 @@ CM.Sim.CalculateGains = function() {
 	if (CM.Sim.Has('A lump of coal')) mult *= 1.01;
 	if (CM.Sim.Has('An itchy sweater')) mult *= 1.01;
 	if (CM.Sim.Has('Santa\'s dominion')) mult *= 1.2;
+	
+	var buildMult=1;
+	if (CM.Sim.hasGod)
+	{
+		var godLvl=CM.Sim.hasGod('asceticism');
+		if (godLvl==1) mult*=1.15;
+		else if (godLvl==2) mult*=1.1;
+		else if (godLvl==3) mult*=1.05;
+				
+		var godLvl=CM.Sim.hasGod('ages');
+		if (godLvl==1) mult*=1+0.15*Math.sin((Date.now()/1000/(60*60*3))*Math.PI*2);
+		else if (godLvl==2) mult*=1+0.15*Math.sin((Date.now()/1000/(60*60*12))*Math.PI*2);
+		else if (godLvl==3) mult*=1+0.15*Math.sin((Date.now()/1000/(60*60*24))*Math.PI*2);
+				
+		var godLvl=CM.Sim.hasGod('decadence');
+		if (godLvl==1) buildMult*=0.93;
+		else if (godLvl==2) buildMult*=0.95;
+		else if (godLvl==3) buildMult*=0.98;
+				
+		var godLvl=CM.Sim.hasGod('industry');
+		if (godLvl==1) buildMult*=1.1;
+		else if (godLvl==2) buildMult*=1.05;
+		else if (godLvl==3) buildMult*=1.03;
+				
+		var godLvl=CM.Sim.hasGod('labor');
+		if (godLvl==1) buildMult*=0.97;
+		else if (godLvl==2) buildMult*=0.98;
+		else if (godLvl==3) buildMult*=0.99;
+	}
 
 	if (CM.Sim.Has('Santa\'s legacy')) mult *= 1 + (Game.santaLevel + 1) * 0.03;
 
 	for (var i in CM.Sim.Objects) {
 		var me = CM.Sim.Objects[i];
 		CM.Sim.cookiesPs += me.amount * (typeof(me.cps) == 'function' ? me.cps(me) : me.cps);
+		if (Game.ascensionMode!=1) CM.Sim.cookiesPs*=(1+me.level*0.01)*buildMult;
 	}
 
 	if (CM.Sim.Has('"egg"')) CM.Sim.cookiesPs += 9; // "egg"
