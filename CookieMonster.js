@@ -2829,10 +2829,11 @@ CM.Sim.CalculateGains = function() {
 
 	if (CM.Sim.Has('Santa\'s legacy')) mult *= 1 + (Game.santaLevel + 1) * 0.03;
 
-	for (var i in CM.Sim.Objects) {
+	for (var i in CM.Sim.Objects)
+	{
 		var me = CM.Sim.Objects[i];
 		CM.Sim.cookiesPs += me.amount * (typeof(me.cps) == 'function' ? me.cps(me) : me.cps);
-		if (Game.ascensionMode!=1) CM.Sim.cookiesPs*=(1+me.level*0.01)*buildMult;
+		if (Game.ascensionMode!=1) CM.Sim.cookiesPs *= (1 + me.level * 0.01) * buildMult;
 	}
 
 	if (CM.Sim.Has('"egg"')) CM.Sim.cookiesPs += 9; // "egg"
