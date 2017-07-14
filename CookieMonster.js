@@ -2695,7 +2695,7 @@ CM.Sim.hasGod = function(what)
 	var god = M.gods[what];
 	for (var i = 0; i < 3; i++)
 	{
-		if (M.slot[i] == god.id) return (i + 1);
+		if (CM.Sim.slot[i] == god.id) return (i + 1);
 	}
 	return false;
 }
@@ -2747,6 +2747,9 @@ CM.Sim.CopyData = function() {
 	CM.Sim.prestige = Game.prestige;
 	CM.Sim.dragonAura = Game.dragonAura;
 	CM.Sim.dragonAura2 = Game.dragonAura2;
+	CM.Sim.slot[0] = M.slot[0];
+	CM.Sim.slot[1] = M.slot[1];
+	CM.Sim.slot[2] = M.slot[2];
 	
 	// Buildings
 	for (var i in Game.Objects) {
@@ -2802,12 +2805,12 @@ CM.Sim.CalculateGains = function() {
 	var buildMult=1;
 	if (CM.Sim.hasGod)
 	{
-		var godLvl=CM.Sim.hasGod('asceticism');
+		var godLvl = CM.Sim.hasGod('asceticism');
 		if (godLvl == 1) mult *= 1.15;
 		else if (godLvl == 2) mult *= 1.1;
 		else if (godLvl == 3) mult *= 1.05;
 				
-		var godLvl=CM.Sim.hasGod('ages');
+		var godLvl = CM.Sim.hasGod('ages');
 		if (godLvl == 1) mult *= 1 + 0.15 * Math.sin((Date.now() / 1000 / (60 * 60 * 3)) * Math.PI * 2);
 		else if (godLvl == 2) mult *= 1 + 0.15 * Math.sin((Date.now() / 1000 / (60 * 60 * 12)) * Math.PI * 2);
 		else if (godLvl == 3) mult *= 1 + 0.15 * Math.sin((Date.now() / 1000 / (60 * 60 * 24)) * Math.PI * 2);
