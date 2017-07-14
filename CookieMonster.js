@@ -2834,7 +2834,7 @@ CM.Sim.CalculateGains = function() {
 	{
 		var me = CM.Sim.Objects[i];
 		CM.Sim.cookiesPs += me.amount * (typeof(me.cps) == 'function' ? me.cps(me) : me.cps);
-		if (Game.ascensionMode!=1) CM.Sim.cookiesPs *= (1 + me.level * 0.01) * buildMult;
+		if (Game.ascensionMode!=1) CM.Sim.cookiesPs *= (1 + (me.level * 0.01)) * buildMult;
 	}
 
 	if (CM.Sim.Has('"egg"')) CM.Sim.cookiesPs += 9; // "egg"
