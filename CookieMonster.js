@@ -2572,8 +2572,8 @@ CM.DelayInit = function() {
 CM.ConfigDefault = {BotBar: 1, TimerBar: 1, TimerBarPos: 0, BuildColor: 1, BulkBuildColor: 0, UpBarColor: 1, CalcWrink: 1, CPSMode: 1, AvgCPSHist: 2, AvgClicksHist: 2, ToolWarnCautBon: 0, Flash: 1, Sound: 1,  Volume: 100, GCSoundURL: 'http://freesound.org/data/previews/66/66717_931655-lq.mp3', SeaSoundURL: 'http://www.freesound.org/data/previews/121/121099_2193266-lq.mp3', GCTimer: 1, Title: 1, Favicon: 1, Tooltip: 1, TooltipAmor: 0, ToolWarnCaut: 1, ToolWarnCautPos: 1, ToolWrink: 1, Stats: 1, UpStats: 1, TimeFormat: 0, SayTime: 1, Scale: 2, StatsPref: {Lucky: 1, Chain: 1, Prestige: 1, Wrink: 1, Sea: 1, Misc: 1}, Colors : {Blue: '#4bb8f0', Green: '#00ff00', Yellow: '#ffff00', Orange: '#ff7f00', Red: '#ff0000', Purple: '#ff00ff', Gray: '#b3b3b3', Pink: '#ff1493', Brown: '#8b4513'}};
 CM.ConfigPrefix = 'CMConfig';
 
-CM.VersionMajor = '2.002';
-CM.VersionMinor = '2';
+CM.VersionMajor = '2.0033';
+CM.VersionMinor = '0';
 
 /*******
  * Sim *
@@ -2600,14 +2600,14 @@ CM.Sim.BuildingGetPrice = function(basePrice, start, free, increase) {
 		if (Game.Has('Divine discount')) price *= 0.99;
 		if (Game.hasAura('Fierce Hoarder')) price *= 0.98;
 		if (Game.hasBuff('Everything must go')) price *= 0.95;
-		if (Game.hasBuff('Crafty pixies')) price*=0.98;
-		if (Game.hasBuff('Nasty goblins')) price*=1.02;
+		if (Game.hasBuff('Crafty pixies')) price *= 0.98;
+		if (Game.hasBuff('Nasty goblins')) price *= 1.02;
 		if (Game.hasGod)
 		{
-			var godLvl=Game.hasGod('creation');
-			if (godLvl==1) price*=0.93;
-			else if (godLvl==2) price*=0.95;
-			else if (godLvl==3) price*=0.98;
+			var godLvl = Game.hasGod('creation');
+			if (godLvl == 1) price *= 0.93;
+			else if (godLvl == 2) price *= 0.95;
+			else if (godLvl == 3) price *= 0.98;
 		}
 		price = Math.ceil(price);
 		moni+=price;
@@ -2643,14 +2643,14 @@ CM.Sim.BuildingSell = function(basePrice, start, free, amount, emuAura) {
 		if (Game.Has('Divine discount')) price *= 0.99;
 		if (Game.hasAura('Fierce Hoarder')) price *= 0.98;
 		if (Game.hasBuff('Everything must go')) price *= 0.95;
-		if (Game.hasBuff('Crafty pixies')) price*=0.98;
-		if (Game.hasBuff('Nasty goblins')) price*=1.02;
+		if (Game.hasBuff('Crafty pixies')) price *= 0.98;
+		if (Game.hasBuff('Nasty goblins')) price *= 1.02;
 		if (Game.hasGod)
 		{
-			var godLvl=Game.hasGod('creation');
-			if (godLvl==1) price*=0.93;
-			else if (godLvl==2) price*=0.95;
-			else if (godLvl==3) price*=0.98;
+			var godLvl = Game.hasGod('creation');
+			if (godLvl == 1) price *= 0.93;
+			else if (godLvl == 2) price *= 0.95;
+			else if (godLvl == 3) price *= 0.98;
 		}
 		price = Math.ceil(price);
 		var giveBack = 0.5;
@@ -2803,29 +2803,29 @@ CM.Sim.CalculateGains = function() {
 	if (CM.Sim.hasGod)
 	{
 		var godLvl=CM.Sim.hasGod('asceticism');
-		if (godLvl==1) mult*=1.15;
-		else if (godLvl==2) mult*=1.1;
-		else if (godLvl==3) mult*=1.05;
+		if (godLvl == 1) mult *= 1.15;
+		else if (godLvl == 2) mult *= 1.1;
+		else if (godLvl == 3) mult *= 1.05;
 				
 		var godLvl=CM.Sim.hasGod('ages');
-		if (godLvl==1) mult*=1+0.15*Math.sin((Date.now()/1000/(60*60*3))*Math.PI*2);
-		else if (godLvl==2) mult*=1+0.15*Math.sin((Date.now()/1000/(60*60*12))*Math.PI*2);
-		else if (godLvl==3) mult*=1+0.15*Math.sin((Date.now()/1000/(60*60*24))*Math.PI*2);
+		if (godLvl == 1) mult *= 1 + 0.15 * Math.sin((Date.now() / 1000 / (60 * 60 * 3)) * Math.PI * 2);
+		else if (godLvl == 2) mult *= 1 + 0.15 * Math.sin((Date.now() / 1000 / (60 * 60 * 12)) * Math.PI * 2);
+		else if (godLvl == 3) mult *= 1 + 0.15 * Math.sin((Date.now() / 1000 / (60 * 60 * 24)) * Math.PI * 2);
 				
-		var godLvl=CM.Sim.hasGod('decadence');
-		if (godLvl==1) buildMult*=0.93;
-		else if (godLvl==2) buildMult*=0.95;
-		else if (godLvl==3) buildMult*=0.98;
+		var godLvl = CM.Sim.hasGod('decadence');
+		if (godLvl == 1) buildMult *= 0.93;
+		else if (godLvl == 2) buildMult *= 0.95;
+		else if (godLvl == 3) buildMult *= 0.98;
 				
-		var godLvl=CM.Sim.hasGod('industry');
-		if (godLvl==1) buildMult*=1.1;
-		else if (godLvl==2) buildMult*=1.05;
-		else if (godLvl==3) buildMult*=1.03;
+		var godLvl = CM.Sim.hasGod('industry');
+		if (godLvl == 1) buildMult *= 1.1;
+		else if (godLvl == 2) buildMult *= 1.05;
+		else if (godLvl == 3) buildMult *= 1.03;
 				
-		var godLvl=CM.Sim.hasGod('labor');
-		if (godLvl==1) buildMult*=0.97;
-		else if (godLvl==2) buildMult*=0.98;
-		else if (godLvl==3) buildMult*=0.99;
+		var godLvl = CM.Sim.hasGod('labor');
+		if (godLvl == 1) buildMult *= 0.97;
+		else if (godLvl == 2) buildMult *= 0.98;
+		else if (godLvl == 3) buildMult *= 0.99;
 	}
 
 	if (CM.Sim.Has('Santa\'s legacy')) mult *= 1 + (Game.santaLevel + 1) * 0.03;
@@ -2846,10 +2846,10 @@ CM.Sim.CalculateGains = function() {
 	if (CM.Sim.hasAura('Breath of Milk')) milkMult *= 1.05;
 	if (CM.Sim.hasGod)
 	{
-		var godLvl=CM.Sim.hasGod('mother');
-		if (godLvl==1) milkMult*=1.1;
-		else if (godLvl==2) milkMult*=1.06;
-		else if (godLvl==3) milkMult*=1.03;
+		var godLvl = CM.Sim.hasGod('mother');
+		if (godLvl == 1) milkMult *= 1.1;
+		else if (godLvl == 2) milkMult *= 1.06;
+		else if (godLvl == 3) milkMult *= 1.03;
 	}
 	if (CM.Sim.Has('Kitten helpers')) mult *= (1 + (CM.Sim.AchievementsOwned / 25) * 0.1 * milkMult);
 	if (CM.Sim.Has('Kitten workers')) mult *= (1 + (CM.Sim.AchievementsOwned / 25) * 0.125 * milkMult);
