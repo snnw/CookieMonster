@@ -2604,7 +2604,7 @@ CM.Sim.BuildingGetPrice = function(basePrice, start, free, increase) {
 		if (Game.hasBuff('Nasty goblins')) price *= 1.02;
 		if (Game.hasGod)
 		{
-			var godLvl = CM.Sim.hasGod('creation');
+			var godLvl = Game.hasGod('creation');
 			if (godLvl == 1) price *= 0.93;
 			else if (godLvl == 2) price *= 0.95;
 			else if (godLvl == 3) price *= 0.98;
@@ -2647,7 +2647,7 @@ CM.Sim.BuildingSell = function(basePrice, start, free, amount, emuAura) {
 		if (Game.hasBuff('Nasty goblins')) price *= 1.02;
 		if (Game.hasGod)
 		{
-			var godLvl = CM.Sim.hasGod('creation');
+			var godLvl = Game.hasGod('creation');
 			if (godLvl == 1) price *= 0.93;
 			else if (godLvl == 2) price *= 0.95;
 			else if (godLvl == 3) price *= 0.98;
@@ -2690,7 +2690,7 @@ CM.Sim.hasAura = function(what) {
 		return false;
 }
 
-CM.Sim.hasGod = function(what)
+/*CM.Sim.hasGod = function(what)
 {
 	var god = M.gods[what];
 	for (var i = 0; i < 3; i++)
@@ -2698,7 +2698,7 @@ CM.Sim.hasGod = function(what)
 		if (CM.Sim.slot[i] == god.id) return (i + 1);
 	}
 	return false;
-}
+}*/
 
 eval('CM.Sim.GetTieredCpsMult = ' + Game.GetTieredCpsMult.toString().split('Game.Has').join('CM.Sim.Has').split('me.tieredUpgrades').join('Game.Objects[me.name].tieredUpgrades').split('me.synergies').join('Game.Objects[me.name].synergies').split('syn.buildingTie1.amount').join('CM.Sim.Objects[syn.buildingTie1.name].amount').split('syn.buildingTie2.amount').join('CM.Sim.Objects[syn.buildingTie2.name].amount'));
 
@@ -2747,9 +2747,9 @@ CM.Sim.CopyData = function() {
 	CM.Sim.prestige = Game.prestige;
 	CM.Sim.dragonAura = Game.dragonAura;
 	CM.Sim.dragonAura2 = Game.dragonAura2;
-	CM.Sim.slot[0] = M.slot[0];
+	/*CM.Sim.slot[0] = M.slot[0];
 	CM.Sim.slot[1] = M.slot[1];
-	CM.Sim.slot[2] = M.slot[2];
+	CM.Sim.slot[2] = M.slot[2];*/
 	
 	// Buildings
 	for (var i in Game.Objects) {
@@ -2803,29 +2803,29 @@ CM.Sim.CalculateGains = function() {
 	if (CM.Sim.Has('Santa\'s dominion')) mult *= 1.2;
 	
 	var buildMult=1;
-	if (CM.Sim.hasGod)
+	if (Game.hasGod)
 	{
-		var godLvl = CM.Sim.hasGod('asceticism');
+		var godLvl = Game.hasGod('asceticism');
 		if (godLvl == 1) mult *= 1.15;
 		else if (godLvl == 2) mult *= 1.1;
 		else if (godLvl == 3) mult *= 1.05;
 				
-		var godLvl = CM.Sim.hasGod('ages');
+		var godLvl = Game.hasGod('ages');
 		if (godLvl == 1) mult *= 1 + 0.15 * Math.sin((Date.now() / 1000 / (60 * 60 * 3)) * Math.PI * 2);
 		else if (godLvl == 2) mult *= 1 + 0.15 * Math.sin((Date.now() / 1000 / (60 * 60 * 12)) * Math.PI * 2);
 		else if (godLvl == 3) mult *= 1 + 0.15 * Math.sin((Date.now() / 1000 / (60 * 60 * 24)) * Math.PI * 2);
 				
-		var godLvl = CM.Sim.hasGod('decadence');
+		var godLvl = Game.hasGod('decadence');
 		if (godLvl == 1) buildMult *= 0.93;
 		else if (godLvl == 2) buildMult *= 0.95;
 		else if (godLvl == 3) buildMult *= 0.98;
 				
-		var godLvl = CM.Sim.hasGod('industry');
+		var godLvl = Game.hasGod('industry');
 		if (godLvl == 1) buildMult *= 1.1;
 		else if (godLvl == 2) buildMult *= 1.05;
 		else if (godLvl == 3) buildMult *= 1.03;
 				
-		var godLvl = CM.Sim.hasGod('labor');
+		var godLvl = Game.hasGod('labor');
 		if (godLvl == 1) buildMult *= 0.97;
 		else if (godLvl == 2) buildMult *= 0.98;
 		else if (godLvl == 3) buildMult *= 0.99;
@@ -2847,9 +2847,9 @@ CM.Sim.CalculateGains = function() {
 	var milkMult=1;
 	if (CM.Sim.Has('Santa\'s milk and cookies')) milkMult *= 1.05;
 	if (CM.Sim.hasAura('Breath of Milk')) milkMult *= 1.05;
-	if (CM.Sim.hasGod)
+	if (Game.hasGod)
 	{
-		var godLvl = CM.Sim.hasGod('mother');
+		var godLvl = Game.hasGod('mother');
 		if (godLvl == 1) milkMult *= 1.1;
 		else if (godLvl == 2) milkMult *= 1.06;
 		else if (godLvl == 3) milkMult *= 1.03;
