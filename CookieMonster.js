@@ -2835,7 +2835,7 @@ CM.Sim.CalculateGains = function() {
 		var me=CM.Sim.Objects[i];
 		me.storedCps = (typeof(me.cps) == 'function' ? me.cps(me) : me.cps);
 		if (Game.ascensionMode!=1) me.storedCps *= (1 + (me.level * 0.01)) * buildMult;
-		me.storedTotalCps = me.amount*me.storedCps;
+		me.storedTotalCps = me.amount * me.storedCps;
 		CM.Sim.cookiesPs += me.storedTotalCps;
 	}
 	
