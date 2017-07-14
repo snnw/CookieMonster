@@ -2844,8 +2844,8 @@ CM.Sim.CalculateGains = function() {
 	var milkMult=1;
 	if (CM.Sim.Has('Santa\'s milk and cookies')) milkMult *= 1.05;
 	if (CM.Sim.hasAura('Breath of Milk')) milkMult *= 1.05;
-	if (CM.Sim.hasGod)
-	/*{
+	/*if (CM.Sim.hasGod)
+	{
 		var godLvl=CM.Sim.hasGod('mother');
 		if (godLvl==1) milkMult*=1.1;
 		else if (godLvl==2) milkMult*=1.06;
