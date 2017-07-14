@@ -2604,7 +2604,7 @@ CM.Sim.BuildingGetPrice = function(basePrice, start, free, increase) {
 		if (Game.hasBuff('Nasty goblins')) price *= 1.02;
 		if (Game.hasGod)
 		{
-			var godLvl = Game.hasGod('creation');
+			var godLvl = CM.Sim.hasGod('creation');
 			if (godLvl == 1) price *= 0.93;
 			else if (godLvl == 2) price *= 0.95;
 			else if (godLvl == 3) price *= 0.98;
@@ -2647,7 +2647,7 @@ CM.Sim.BuildingSell = function(basePrice, start, free, amount, emuAura) {
 		if (Game.hasBuff('Nasty goblins')) price *= 1.02;
 		if (Game.hasGod)
 		{
-			var godLvl = Game.hasGod('creation');
+			var godLvl = CM.Sim.hasGod('creation');
 			if (godLvl == 1) price *= 0.93;
 			else if (godLvl == 2) price *= 0.95;
 			else if (godLvl == 3) price *= 0.98;
